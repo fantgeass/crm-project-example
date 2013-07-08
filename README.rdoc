@@ -3,6 +3,6 @@
 Customer relationship management (CRM) is a model for managing a company’s interactions with current and future customers.
 It involves using technology to organize, automate, and synchronize sales, marketing, customer service, and technical support.
 
-* this is some code form real working project
+* this is some code from real working project
 * all assets were excluded
 * some files from backend source code were excluded or changed for security purposes
