@@ -1,0 +1,20 @@
+table
+  tr
+    th
+    th Title
+    th
+    th
+    th
+    th
+
+  - @attachments.each do |attachment|
+    tr
+      td = attachment.file.content_type
+      td = link_to attachment.title, attachment.file.url
+      td = attachment.category_title
+      td = attachment.job_type_title
+      td = attachment.file_size
+      td = link_to 'Выбрать', '#', class: 'add-attachment'
+
+- content_for :box_toolbar do
+  = link_to 'Добавить файл', new_attachment_path, class: 'btn'

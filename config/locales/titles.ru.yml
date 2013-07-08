@@ -1,0 +1,12 @@
+ru:
+  home#index: Главная
+  tcps#index: Список ТКП
+  tcps#new: Создание ТКП
+  attachments#index: Файлы
+  registrations#update: Редактировать профиль
+  registrations#edit: Редактировать профиль
+  users#edit: Редактировать профиль
+  users#update: Редактировать профиль
+  users#show: Просмотр профиля
+  posts#index: Новости
+  posts#show: Просмотр новости

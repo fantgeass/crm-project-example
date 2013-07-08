@@ -1,0 +1,26 @@
+- content_for :box_header do
+   = semantic_navigation config: :bootstrap, id: 'tcp_index_menu' ,class: 'nav nav-tabs header-tabs' do |n|
+      - n.item 'Открытые', url_for(state_equals: :active), highlights_on: \
+          proc{ params['state_equals'] == 'active' || params['state_equals'].nil? }
+      - n.item 'Закрытые', url_for(state_equals: :closed), highlights_on: \
+          proc{ params['state_equals'] == 'closed' }
+      - n.item 'Завершенные',  url_for(state_equals: :completed), highlights_on: \
+          proc{ params['state_equals'] == 'completed' }
+
+.bootstrap-widget-body-top-bar
+   .pull-right
+      = check_box_tag 'show_all', '', params[:show_all] === '1' ? true : false
+      = label_tag 'show_all', ' Показать всё'
+   div
+      span.total= "Всего: #{collection.total_count} #{Russian::p(collection.total_count, 'запись', 'записи', 'записей')}"
+
+= render 'shared/projectable/table'
+
+coffee:
+  $('#show_all').on('change', ->
+    location_href = removeURLParameter(window.location.href, 'page')
+    if $(this).is(':checked')
+      window.location.href = updateURLParameter(location_href, 'show_all', 1)
+    else
+      window.location.href = removeURLParameter(location_href, 'show_all')
+  )

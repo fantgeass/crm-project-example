@@ -1,0 +1,3 @@
+class AttachmentsDecorator < CollectionDecorator
+
+end

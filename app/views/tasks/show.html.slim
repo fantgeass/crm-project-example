@@ -1,0 +1,8 @@
+- content_for :related_tasks do
+  - unless @task.related_tasks.empty?
+    h5 Связанные задачи
+    ol
+      - for related_task in @task.related_tasks
+        li= link_to related_task.title, resource_url(related_task)
+
+= render 'shared/taskable/show'

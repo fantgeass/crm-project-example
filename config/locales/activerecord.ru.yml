@@ -1,0 +1,52 @@
+ru:
+  attributes:
+    created_at: Дата создания
+    updated_at: Дата редактирования
+    created_by: Создатель
+    updated_by: Редактор
+    state: Статус
+    title: Название
+    short_description: Короткое описание
+    description: Описание
+    attachments: Файлы
+    company_id: Компания
+    company: Компания
+    client_id: Клиент
+    department: Департамент
+    position: Должность
+    password: Пароль
+    file: Файл
+  activerecord:
+    models:
+      tcp: ТКП
+      company: Компания
+      contact: Контакт
+      task: Задача
+      attachment_category: Категория
+    attributes:
+      user:
+        email: Почтовый ящик
+        fullname: Полное имя
+        gender: Пол
+        phone: Телефон
+        about: О себе
+        date_of_birth: Дата рождения
+        salary: Зарплата
+        remember_me: Запомнить меня?
+      tcp:
+        company: Компания
+        contact: Контакт
+        complete_date: Дата завершения
+      company:
+        title: Название
+      task:
+        priority: Приоритет
+        users: Исполнители
+      attachment:
+        attachment_category: Категория
+        attachment_job_type: Тип работы
+        accessible: Доступ?
+
+
+
+

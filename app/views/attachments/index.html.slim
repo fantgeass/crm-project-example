@@ -1,0 +1,73 @@
+.bootstrap-widget-content
+  form#attachments-filter-form.form-horizontal
+    .row
+      .span5
+        .form-field
+          label Название или описание
+          textarea.span4 name="title_or_desc" style="height: 60px; resize: none;"= params[:title_or_desc]
+        .form-field
+          label Дата от
+          input#start_date.datepicker.span2 name="start_date" type="text" value="#{params[:start_date]}" data-validate="true" readonly="true"
+          = ' до '
+          input#finish_date.datepicker.span2 name="finish_date" type="text" value="#{params[:finish_date]}" data-validate="true" readonly="true"
+      .span3
+        .form-field
+          label Тип работы
+          = select_tag('job_type_id', options_from_collection_for_select(@existed_job_types, 'id', 'title', params[:job_type_id]), \
+              class: 'span2', prompt: 'Все типы работ')
+        .form-field
+          label Тип файла
+          = select_tag('content_type', options_for_select(@existed_content_types, params[:content_type]), \
+              class: 'span2', prompt: 'Все типы файлов')
+        .form-field
+          label Категория
+          = select_tag('category_id', options_from_collection_for_select(@existed_categories, 'id', 'title', params[:category_id]), \
+              class: 'span2', prompt: 'Все категории')
+        .buttons
+          input.btn.btn-spbec-default type="reset" value="Сбросить"
+            input.btn.btn-spbec-default type="submit" value="Поиск"
+
+.bootstrap-widget-body-top-bar
+  | Всего: #{@attachments.total_count} записей
+
+table.table.table-striped.table-spbec
+  tbody
+  - @attachments.each do |attachment|
+    tr
+      td.list-files.short_td
+        span.file-doc
+      td
+        .tcp-name
+          = "#{attachment.title} "
+          /a.bright href="#{attachment.file.url}" (Скачать)
+          a.bright href="#{download_attachment_path(attachment)}" (Скачать)
+        = parent.title if parent?
+        .metadata
+          span.filesize= attachment.file_size
+          span.add-data= attachment.created_at
+      td
+        = attachment.attachment_category_title
+        br
+        = attachment.attachment_job_type_title
+      td
+        = attachment.creator_link_avatar_tag
+      /td.table-actions
+      /  = link_to '', [parent, attachment], class: 'action action-edit'
+      /  = link_to '', [parent, attachment], confirm: 'Вы уверены?', method: :delete, class: 'action action-close'
+  tfoot
+    tr
+      td colspan="6"
+        = paginate @attachments
+
+- content_for :box_toolbar do
+  span#add-attachment-button-wrapper
+    = link_to "#{icon_tag(:plus)} Добавить файл".html_safe, '#', class: 'btn btn-spbec', id: 'add-attachment-button'
+
+javascript:
+  new Spbec.Views.AttachmentsNewButton({
+    form_url: "#{raw(collection_path + '/form')}",
+    el: $('#add-attachment-button-wrapper')
+  });
+  new Spbec.Views.AttachmentsFilterForm({
+    el: $('#attachments-filter-form')
+  });

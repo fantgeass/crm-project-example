@@ -1,0 +1,19 @@
+ru:
+  show: Просмотр
+  edit: Редактировать
+  destroy: Удалить
+  back: Вернуться
+  update: Редактировать
+  delete: Удалить
+  are_you_sure?: Вы уверены?
+  active: Активен
+  closed: Закрыт
+  completed: Завершён
+  empty: Значение не указано
+  empty_date: Дата не указана
+  yesterday: "Вчера"
+  today: "Сегодня"
+  tomorrow: "Завтра"
+  open: Открыть
+  close: Закрыть
+  complete: Завершить

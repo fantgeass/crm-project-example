@@ -1,0 +1,32 @@
+.bootstrap-widget-body-top-bar-2
+  .pull-right
+    ul.inline.actions
+      li= update_link_to edit_resource_url
+      li= resource.is_complete? ? resource.link_to_open(parent) : resource.link_to_complete(parent)
+div class="bootstrap-widget-content stripe #{resource.stripe_class}"
+  .bootstrap-widget-content-leftcol
+    img.project-pic.pull-left src="#{resource.creator_avatar_url}" alt="#{resource.creator}"
+    h5= resource.title
+    p= resource.description
+    - unless resource.attachments.empty?
+      h5 Файлы
+      ul.list-files
+        - resource.attachments.each do |attachment|
+          li
+            a.file-xls href="#{attachment.file.url}"= "#{attachment.title} (#{attachment.file_size})"
+
+  .bootstrap-widget-content-sidebar
+    .form-field
+      .tcp-start= resource.planned_start_date
+      .tcp-finish= resource.planned_complete_date
+    div.progress.progress-spbec
+      == resource.progress_bar
+    = yield(:related_tasks)
+    - unless resource.users.empty?
+      h5 Ответственные
+      ul.inline.no-padding
+        - for user in resource.users
+          li
+            img src="#{user.avatar_url}" alt="#{user}" title="#{user}" class="user-avatar"
+
+= render 'comments/widget', comments: resource.comment_threads, comments_url: polymorphic_url([parent, resource, 'comments'])

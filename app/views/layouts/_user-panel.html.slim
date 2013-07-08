@@ -1,0 +1,12 @@
+.user-panel.clearfix
+  = link_to current_user.avatar_tag, user_path(current_user), class: 'avatar'
+  .btn-group.user-menu
+    button.btn.btn-mini.btn-spbec.dropdown-toggle data-toggle="dropdown"
+      span.caret
+    ul.dropdown-menu
+      li= link_to 'Настройки профиля', edit_user_registration_path
+  ul.user-stat
+    li.first_col= "ТКП:  #{current_user.tcps_count}"
+    li= "Проектов:  #{current_user.projects_count}"
+    li.first_col= "Задач: #{current_user.tasks.size}"
+    li= "Вопросов: #{current_user.questions.size}"

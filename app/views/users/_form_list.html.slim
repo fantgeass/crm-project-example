@@ -1,0 +1,15 @@
+#users-form-list
+
+javascript:
+  $(function() {
+    var chosenUsersJSON = #{render('users/collection', users: chosen_users).html_safe};
+    var staffUsersJSON = #{render('users/collection', users: staff_users).html_safe};
+    new Spbec.Views.UsersFormListView({
+      chosen_users: new Spbec.Collections.Users(chosenUsersJSON),
+      staff_users: new Spbec.Collections.Users(staffUsersJSON),
+      model_name: '#{model_name}',
+      el: $('#users-form-list')
+    }).render();
+
+  });
+

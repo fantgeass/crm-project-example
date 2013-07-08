@@ -1,0 +1,52 @@
+- klass = model.source.class.name.downcase
+.row.row-spbec
+  = simple_form_for(model, validate: true, html: {id: "tcp_form"}) do |f|
+    .span5
+      .padded
+        = f.input :title, input_html: {class: 'input-xlarge'}
+
+        = f.input :company_id do
+          = f.collection_select :company_id, Company.all, :id, :title, {prompt: ''},\
+              {id: 'tcp_company_id', class: 'input-xlarge',  placeholder: 'Выберите компанию'}
+          span.plus-buttons=  link_to icon_tag('plus', 'large'), '#', \
+             title: 'Добавить компанию', id: 'add-company-link'
+
+        #client-block
+          = f.input :client_id do
+            = f.collection_select :client_id, model.company_users.to_a, :id, :fullname, {prompt: ''},\
+                {id: 'tcp_client_id', class: 'input-xlarge', placeholder: 'Выберите клиента'}
+            span.plus-buttons= link_to icon_tag('plus', 'large'), '#', \
+               title: 'Добавить пользователя', id: 'add-client-link'
+
+        = f.input 'Период' do
+          = f.input_field :planned_start_date, as: :datepicker, class: 'input-date input-date-from', \
+              placeholder: '...', readonly: true
+          span.date-divider= 'до'
+          = f.input_field :planned_complete_date, as: :datepicker, class: 'input-date input-date-to', \
+              placeholder: '...', readonly: true
+
+        = f.input :description, as: :text, input_html: {class: 'input-xlarge', rows: 7}
+    .span4
+      .padded
+        .form-field
+          = render 'staff/widget', staff: model.staff
+          = f.error :staff
+        .form-field
+          = render 'attachments/widget', \
+              chosen_attachments: model.attachments, \
+              model_name: klass, \
+              form_url: raw((model.new_record? ? attachments_path : polymorphic_path([resource, Attachment])) + '/form')
+
+        .text-right.btn-save-cancel
+          = link_to 'Отменить', collection_url, class: 'btn btn-spbec'
+          = ' '
+          = f.button :submit, 'Сохранить',class: 'btn btn-spbec'
+
+javascript:
+  var usersJSON = #{render('users/collection', users: User.all).html_safe};
+  var users = new Spbec.Collections.Users(usersJSON);
+
+  new Spbec.Views.TcpForm({
+    users: users,
+    el: $('#tcp_form')
+  });

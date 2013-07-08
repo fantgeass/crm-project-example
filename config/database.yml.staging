@@ -1,0 +1,23 @@
+development:
+  adapter: mysql2
+  database: spbec
+  username: root
+  host: localhost
+  password: 'secure password'
+
+
+test:
+  adapter: mysql2
+  database: spbec_test
+  username: root
+  host: localhost
+  password: 'secure password'
+
+
+production:
+  adapter: mysql2
+  database: spbec
+  username: root
+  host: localhost
+  password: 'secure password'
+

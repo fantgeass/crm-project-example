@@ -1,0 +1,3 @@
+class DepartmentDecorator < ApplicationDecorator
+
+end

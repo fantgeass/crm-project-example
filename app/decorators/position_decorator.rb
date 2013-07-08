@@ -1,0 +1,3 @@
+class PositionDecorator < ApplicationDecorator
+
+end

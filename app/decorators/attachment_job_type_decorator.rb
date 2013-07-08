@@ -1,0 +1,3 @@
+class AttachmentJobTypeDecorator < ApplicationDecorator
+
+end

@@ -1,0 +1,14 @@
+#staff-form-list
+
+javascript:
+  $(function() {
+    var staffJSON = #{render('staff/collection', staff: staff).html_safe};
+    new Spbec.Views.StaffFormList({
+      collection: new Spbec.Collections.Staff(staffJSON),
+      model: new Spbec.Models.StaffMember(),
+      users: users,
+      el: $('#staff-form-list')
+    }).render();
+
+  });
+

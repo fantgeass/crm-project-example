@@ -1,0 +1,24 @@
+= simple_form_for @attachment, {url: polymorphic_path([parent, Attachment]), validate: true, html: {multipart: true}} do |f|
+  - unless parent?
+    .form-field
+      label Для
+      .form-unput
+        .btn-group data-toggle="buttons-radio"
+          button#choose-tcp.btn.btn-spbec.active type="button" ТКП
+          button#choose-project.btn.btn-spbec type="button" Проекта
+        - tcp_options = options_from_collection_for_select(Tcp.all, :id, :title)
+        - project_options = options_from_collection_for_select(Project.all, :id, :title)
+        = f.select :tcps, tcp_options, {prompt: 'Выберите ТКП'}, {style: 'margin: 0 0 20px 30px;'}
+        = f.select :projects, project_options, {prompt: 'Выберите проект'}, {disabled: 1, class: 'hide', style: 'margin: 0 0 20px 30px;'}
+
+  .form-field= f.input :file
+  .form-field= f.input :title, input_html: {class: 'fullwidth'}
+  .form-field= f.input :description
+  .form-field= f.association :attachment_category, prompt: 'Выберите категорию'
+  .form-field= f.association :attachment_job_type, prompt: 'Выберите тип работы'
+  .form-field
+    label
+    .form-input
+      label
+        = f.check_box :accessible
+        = ' Файл доступен всем?'

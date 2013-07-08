@@ -1,0 +1,29 @@
+.bootstrap-widget-content
+  .pull-left.profile-avatar
+    img src="#{resource.avatar_url}" width="139" height="132"
+  .pull-right.profile-about
+    = simple_form_for(resource, wrapper: :bootstrap_profile, url: form_url, html: {method: :put, multipart: true, class: 'form-horizontal'}) do |f|
+      .profile_edit-fist
+        = f.input :avatar
+        = f.input :fullname, input_html: {class: 'input-xlarge'}
+        = f.input :date_of_birth do
+          = f.input_field :date_of_birth, as: :datepicker, readonly: true, class: 'profile_edit-dr'
+
+      .profile_edit-second
+        = f.association :department
+        = f.association :position
+        = f.association :company
+
+      .profile_edit-third
+        = f.input :phone
+        = f.input :email
+
+      .profile_edit-fourth
+        = f.label :about
+        .profile_edit-textarea
+          = f.input_field :about, as: :text
+
+      .profile_edit-btn.pull-right
+        = link_to 'Отменить', root_path, class: 'btn btn-spbec'
+        = ' '
+        = f.button :submit, 'Сохранить', class: 'btn btn-spbec'

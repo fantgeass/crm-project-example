@@ -1,0 +1,13 @@
+= simple_form_for @user, {remote: true, validate: true, html: {:'data-type' => 'json'}} do |f|
+  .form-field= f.input :fullname
+  .form-field
+    = f.label :date_of_birth
+    = f.input_field :date_of_birth, as: :datepicker
+    = f.error :date_of_birth
+  .form-field= f.input :phone
+  .form-field= f.input :email
+  .form-field= f.input :password, required: true
+  .form-field= f.association :company, prompt: 'Выберите компанию'
+  .form-field= f.association :department, prompt: 'Выберите департамент'
+  .form-field= f.association :position, prompt: 'Выберите должность'
+  .form-field= f.input :about

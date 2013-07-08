@@ -1,0 +1,7 @@
+.bootstrap-widget-content
+  h5
+    .pull-right= update_link_to resource
+    = "#{resource.title} (#{resource.created_at})"
+  p= resource.description
+  b= "Автор: "
+  = resource.creator

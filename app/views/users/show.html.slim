@@ -1,0 +1,22 @@
+.bootstrap-widget-content
+  .pull-left.profile-avatar
+    img src="#{resource.avatar_url}" width="139" height="132"
+  .pull-right.profile-about
+    .pull-right.profile-edit
+      = update_link_to edit_user_path(resource)
+    hgroup
+      h4.profile-fio= resource.fullname
+      h5.profile-position= resource.position
+    dl.profile_about-list
+      dt Департамент:
+      dd= resource.department
+      dt Компания:
+      dd= resource.company
+      dt Дата рождения:
+      dd= resource.date_of_birth
+      dt Тел:
+      dd= resource.phone
+      dt Email:
+      dd= resource.email
+      dt О себе:
+      dd= resource.about

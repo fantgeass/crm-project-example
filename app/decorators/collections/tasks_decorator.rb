@@ -1,0 +1,3 @@
+class TasksDecorator < CollectionDecorator
+
+end

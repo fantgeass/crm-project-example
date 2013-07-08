@@ -1,0 +1,16 @@
+#tasks-form-list
+
+javascript:
+  $(function() {
+    var fromTasksJSON = #{render('tasks/collection', tasks: from_tasks).html_safe};
+    var toTasksJSON = #{render('tasks/collection', tasks: to_tasks).html_safe};
+    var ownerTasksJSON = #{render('tasks/collection', tasks: owner_tasks).html_safe};
+
+    new Spbec.Views.TasksFormList({
+      from_tasks: new Spbec.Collections.Tasks(fromTasksJSON),
+      to_tasks: new Spbec.Collections.Tasks(toTasksJSON),
+      owner_tasks: new Spbec.Collections.Tasks(ownerTasksJSON),
+      model_name: "#{model_name}",
+      el: $('#tasks-form-list')
+    }).render();
+  });

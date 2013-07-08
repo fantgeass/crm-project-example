@@ -1,0 +1,13 @@
+- content_for :box_header do
+  h3= header_prefix + model.to_s
+
+- content_for :after_box_header do
+  .bootstrap-widget-header.bootstrap-widget-sub-header
+    = semantic_navigation config: :bootstrap, class: 'nav nav-tabs header-tabs' do |n|
+      - n.item 'Обзор', model
+      - n.item "Задачи (#{model.tasks.is_complete.size}/#{model.tasks.size})",  url_for([model, Task]), highlights_on: /tasks/
+      - n.item "Вопросы (#{model.questions.is_complete.size}/#{model.questions.size})", url_for([model, Question]), highlights_on: /questions/
+      - n.item "Комментарии (#{model.comment_threads.size})", url_for([model, Comment]), highlights_on: /comments/
+      - n.item "Файлы (#{model.related_attachments.size})", url_for([model, Attachment]), highlights_on: /attachments/
+
+= render :template => 'layouts/application'

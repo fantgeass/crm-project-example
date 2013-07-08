@@ -1,0 +1,9 @@
+- content_for :taskable_form_right_block do
+  .form-field
+    = render 'tasks/form_list', \
+        from_tasks: @task.from_tasks, \
+        to_tasks: @task.to_tasks, \
+        owner_tasks: @task.new_record? ? parent.tasks : parent.tasks.where('id != ?', @task.id), \
+        model_name: 'task'
+
+= render 'shared/taskable/form', model: @task

@@ -1,0 +1,35 @@
+- content_for :box_toolbar do
+  b= @tcp.link_to_create_or_show_project
+
+.bootstrap-widget-body-top-bar
+  .pull-right
+    ul.inline.actions
+      li= update_link_to edit_tcp_path(@tcp)
+      - unless @tcp.state_closed?
+        li= link_to '', close_tcp_path(@tcp), class: 'action action-pause', method: :put, confirm: 'Вы уверены?', title: 'Закрыть'
+      - unless @tcp.state_completed?
+        li= link_to '', complete_tcp_path(@tcp), class: 'action action-mark-done', method: :put, confirm: 'Вы уверены?', title: 'Завершить'
+      - unless @tcp.state_active?
+        li= link_to '', activate_tcp_path(@tcp), class: 'action action-mark-done', method: :put, confirm: 'Вы уверены?', title: 'Активировать'
+
+  div Описание
+
+.bootstrap-widget-content
+  p== @tcp.description
+  dl.spbec-meta-col
+    dt Создатель:
+    dd= @tcp.creator
+    dt Основной контакт:
+    dd= @tcp.client
+    dt Заказчик:
+    dd= @tcp.company
+  dl.spbec-meta-col.last
+    dt Дата создания:
+    dd= @tcp.created_at
+    dt Дата окончания:
+    dd= @tcp.planned_complete_date
+    dt До окончания:
+    dd= @tcp.completeness_days
+
+
+= render 'staff/list', staff: @tcp.staff, staff_url: tcp_staff_index_path(@tcp)

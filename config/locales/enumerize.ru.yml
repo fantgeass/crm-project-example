@@ -1,0 +1,9 @@
+ru:
+  enumerize:
+    gender:
+      male: "Мужчина"
+      female: "Женщина"
+    priority:
+      low: Низкий
+      medium: Средний
+      high: Высокий

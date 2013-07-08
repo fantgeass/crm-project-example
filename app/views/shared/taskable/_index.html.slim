@@ -1,0 +1,28 @@
+= form_tag request.fullpath, method: :get
+.bootstrap-widget-body-top-bar
+   .pull-right
+      = select_tag :is_complete, options_for_select([ \
+          ['Все', ''], \
+          ['Открытые', 0], \
+          ['Завершенные', 1] \
+        ], params[:is_complete])
+
+      = select_tag :order, options_for_select([ \
+          ['Сортировать по', ''], \
+          ['По названию', 'title'], \
+          ['По дате создания', 'created_at'], \
+          ['По статусу', 'is_complete'] \
+          ], params[:order])
+   div
+      span.total= "Всего: #{models.total_count} #{Russian::p(models.total_count, 'запись', 'записи', 'записей')}"
+
+= render 'shared/taskable/table', models: models
+
+- content_for :box_toolbar do
+   = link_to "#{icon_tag 'plus'} #{new_link_label}".html_safe, new_polymorphic_path([parent, class_instance]), class: 'btn btn-spbec'
+
+
+coffee:
+  $('#is_complete, #order').on('change', ->
+    $(this).closest('form').submit()
+  )

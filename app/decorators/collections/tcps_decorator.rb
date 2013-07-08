@@ -1,0 +1,3 @@
+class TcpsDecorator < CollectionDecorator
+
+end

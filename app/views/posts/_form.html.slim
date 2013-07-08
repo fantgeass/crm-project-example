@@ -1,0 +1,11 @@
+.row.row-spbec
+  = simple_form_for resource, validate: true do |f|
+    .span5
+      .padded
+        = f.input :title, input_html: {class: 'input-xxlarge'}
+        = f.input :short_description, input_html: {class: 'input-xxlarge'}
+        = f.input :description, input_html: {class: 'input-xxlarge'}
+
+        = link_to 'Отменить', collection_url, class: 'btn btn-spbec'
+        = ' '
+        = f.button :submit, 'Сохранить',class: 'btn btn-spbec'

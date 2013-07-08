@@ -1,0 +1,46 @@
+- klass = model.source.class.name.downcase
+.row.row-spbec
+  = simple_form_for [parent, model], validate: true, html: {id: 'taskable_form'} do |f|
+    .span5
+      .padded
+        = f.input :title
+
+        = f.input :priority do
+          .btn-group data-toggle="buttons-radio"
+            button#pick-high-priority.btn.btn-spbec-radio.btn-priority-high type="button" Высокий
+            button#pick-medium-priority.btn.btn-spbec-radio.btn-priority-medium type="button" Обычный
+            button#pick-low-priority.btn.btn-spbec-radio.btn-priority-low type="button" Низкий
+          = f.hidden_field :priority
+
+        = f.input 'Период' do
+          = f.input_field :planned_start_date, as: :datepicker, class: 'input-date input-date-from', \
+              placeholder: '...', readonly: true
+          span.date-divider= 'до'
+          = f.input_field :planned_complete_date, as: :datepicker, class: 'input-date input-date-to', \
+              placeholder: '...', readonly: true
+
+        = f.input :description, as: :text
+    .span4
+      .padded
+        = yield(:taskable_form_right_block)
+        .form-field
+          = render 'attachments/widget', \
+              chosen_attachments: model.attachments, \
+              model_name: klass, \
+              form_url: raw(polymorphic_path([parent, Attachment]) + '/form')
+        .form-field
+          = render 'users/form_list', \
+              chosen_users: model.users, \
+              staff_users: model.send("#{klass}able").users, \
+              model_name: klass
+          = f.error :users
+        .text-right.btn-save-cancel
+          = link_to 'Отменить', collection_url, class: 'btn btn-spbec'
+          = ' '
+          = f.button :submit, 'Сохранить', class: 'btn btn-spbec'
+
+javascript:
+  new Spbec.Views.TaskableForm({
+    model_name: "#{klass}",
+    el: $('#taskable_form')
+  });

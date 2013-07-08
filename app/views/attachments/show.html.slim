@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @attachment.title
+p
+  strong Description:
+  = @attachment.description
+p
+  strong Start date:
+  = @attachment.start_date
+p
+  strong Finish date:
+  = @attachment.finish_date
+
+| File:
+= link_to @attachment.title, @attachment.file.url
+br
+= link_to 'Edit', edit_attachment_path(@attachment)
+
+= link_to 'Back', attachments_path

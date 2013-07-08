@@ -1,0 +1,3 @@
+class QuestionsDecorator < CollectionDecorator
+
+end

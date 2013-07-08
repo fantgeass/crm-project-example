@@ -1,0 +1,11 @@
+#staff-list
+
+javascript:
+  $(function() {
+    var staffJSON = #{render('staff/collection', staff: staff).html_safe};
+    var staff_url = "#{staff_url.html_safe}";
+    new Spbec.Views.StaffList({
+      collection: new Spbec.Collections.Staff(staffJSON, {url: staff_url}),
+      el: $('#staff-list')
+    }).render();
+  });

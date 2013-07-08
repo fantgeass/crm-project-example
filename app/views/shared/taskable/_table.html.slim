@@ -1,0 +1,27 @@
+table.table.table-striped.table-spbec#tcps
+  tbody
+  - models.each do |model|
+    tr
+      td class="stripe #{model.stripe_class}"
+        img.user-avatar src="#{model.creator.avatar_url}"
+      td
+        .tcp-name= link_to model.title, resource_path(model)
+        .tcp-items
+          = link_to "(#{model.attachments.size})", resource_path(model), class: 'files'
+          = link_to "(#{model.comment_threads.size})", "#{resource_path(model)}#comments", class: 'comments'
+      td.td-dates
+        .tcp-start= model.planned_start_date
+        .tcp-finish= model.planned_complete_date
+      td.td-progress
+        div.progress.progress-spbec
+          == model.progress_bar
+      td.table-actions
+        - if model.is_complete?
+          = model.link_to_open(parent)
+        - else
+          = model.link_to_complete(parent)
+        = update_link_to edit_resource_url(model)
+  tfoot
+      tr
+        td colspan="6"
+          = paginate models

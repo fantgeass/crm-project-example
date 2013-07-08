@@ -1,0 +1,10 @@
+.navbar.spbec-top-navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      = semantic_navigation config: :bootstrap, class: 'nav' do |n|
+        - n.item 'Главная', '/'
+        - n.item 'ТКП', tcps_path, highlights_on: /tcps/
+        - n.item 'Проекты', projects_path, highlights_on: /projects/
+        - n.item 'База знаний', attachments_path
+        - n.item 'Новости', posts_path, highlights_on: /posts/
+        - n.item 'Выход', destroy_user_session_path, link_html: {method: :delete}

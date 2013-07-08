@@ -1,0 +1,12 @@
+.block
+  header.header
+    h3 Последние новости
+  .content
+    - last_news.each do |post|
+      p
+        = truncate(post.short_description, 2)
+        br
+          b= post.created_at
+
+    p.more
+      = link_to 'Посмотреть остальные', posts_path

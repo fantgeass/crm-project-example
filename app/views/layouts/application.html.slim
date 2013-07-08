@@ -1,0 +1,50 @@
+doctype html
+/![if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="ru">
+/![if IE 7] <html class="no-js lt-ie9 lt-ie8" lang="ru">
+/![if IE 8] <html class="no-js ie8 lt-ie9" lang="ru">
+/![if gt IE 8] <html class="no-js" lang="ru">
+html lang="ru"
+  head
+    title CRM: #{yield(:title)}
+    meta charset="utf-8"
+    meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"
+    meta content="" name="description"
+    meta content="width=device-width" name="viewport"
+    = favicon_link_tag 'favicon.png', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = yield(:head) if content_for?(:head)
+    = csrf_meta_tag
+  body
+    #loading
+    = render 'layouts/top-navbar'
+    .container.wrap
+      .row
+        .span9
+          a.logo href="#{root_path}" title="На главную" Панель администратора
+        .span3
+          = render 'layouts/user-panel'
+      .row
+        .span9
+          = render 'layouts/messages'
+          .bootstrap-widget
+            .bootstrap-widget-header
+              .bootstrap-toolbar.pull-right= yield(:box_toolbar) if content_for?(:box_toolbar)
+              - controller_action = "#{controller.controller_name}##{controller.action_name}"
+              == content_for?(:box_header) ? yield(:box_header) : "<h3>#{t(controller_action)}</h3>"
+            = yield(:after_box_header) if content_for?(:after_box_header)
+            .bootstrap-widget-body
+              = content_for?(:box) ? yield(:box) : yield
+          = yield(:after_box) if content_for?(:after_box)
+        .span3
+          #layout-datepicker.spbek-datepicker
+          br
+          = render 'layouts/last-news'
+    .footer
+      .container
+        .pull-right
+          a href="http://ibecsystems.com/"
+            = image_tag 'ibec-logo.png'
+        p.copyright © 2012 «CRM». Все права защищены
+
+    = yield(:footer) if content_for?(:footer)

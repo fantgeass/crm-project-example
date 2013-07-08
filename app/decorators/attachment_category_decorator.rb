@@ -1,0 +1,3 @@
+class AttachmentCategoryDecorator < ApplicationDecorator
+
+end

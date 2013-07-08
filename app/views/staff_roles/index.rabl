@@ -1,0 +1,1 @@
+extends 'staff_roles/collection'

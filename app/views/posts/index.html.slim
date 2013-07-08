@@ -1,0 +1,22 @@
+- content_for :box_toolbar do
+   = link_to "#{icon_tag('plus')} Создать новость".html_safe, new_resource_path, class: 'btn btn-spbec'
+
+table.table.table-striped.table-bordered
+  thead
+    th Название
+    th Короткое описание
+    th
+  tbody
+  - collection.each do |post|
+    tr
+      td
+        b= link_to post.title, post
+      td= post.short_description
+
+      td.table-actions
+        = update_link_to edit_resource_path(post)
+        = delete_link_to resource_path(post)
+  tfoot
+    tr
+      td colspan="6"
+        = paginate collection

@@ -1,0 +1,15 @@
+#comments
+- attachment_form_url = raw(polymorphic_path([parent, Attachment]) + '/form')
+javascript:
+  $(function() {
+    var commentsJSON = #{render('comments/collection', comments: comments).html_safe};
+    console.log(commentsJSON);
+    new Spbec.Views.CommentsWidget({
+      collection: new Spbec.Collections.Comments(commentsJSON, {urlRoot: "#{comments_url.html_safe}"}),
+      attachments_form_url: "#{attachment_form_url}",
+      comments_url: "#{comments_url.html_safe}",
+      el: $('#comments')
+    }).render();
+
+  });
+

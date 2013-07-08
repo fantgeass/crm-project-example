@@ -1,0 +1,35 @@
+- content_for :box_toolbar do
+  b= link_to 'Просмотреть ТКП', tcp_path(@project.id), class: 'btn btn-spbec'
+
+.bootstrap-widget-body-top-bar
+  .pull-right
+    ul.inline.actions
+      li= update_link_to edit_project_path(@project)
+      - unless @project.state_closed?
+        li= link_to '', close_project_path(@project), class: 'action action-pause', method: :put, confirm: 'Вы уверены?', title: 'Закрыть'
+      - unless @project.state_completed?
+        li= link_to '', complete_project_path(@project), class: 'action action-mark-done', method: :put, confirm: 'Вы уверены?', title: 'Завершить'
+      - unless @project.state_active?
+        li= link_to 'Активировать', activate_project_path(@project), class: 'action', method: :put, confirm: 'Вы уверены?', title: 'Активировать'
+
+  div Описание
+
+.bootstrap-widget-content
+  p== @project.description
+  dl.spbec-meta-col
+    dt Создатель:
+    dd= @project.creator
+    dt Основной контакт:
+    dd= @project.client
+    dt Заказчик:
+    dd= @project.company
+  dl.spbec-meta-col.last
+    dt Дата создания:
+    dd= @project.created_at
+    dt Дата окончания:
+    dd= @project.planned_complete_date
+    dt До окончания:
+    dd= @project.completeness_days
+
+
+= render 'staff/list', staff: @project.staff, staff_url: project_staff_index_path(@project)

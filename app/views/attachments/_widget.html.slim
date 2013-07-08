@@ -1,0 +1,15 @@
+#attachments-form-list
+
+javascript:
+  $(function() {
+    var attachmentsJSON = #{render('attachments/collection', attachments: chosen_attachments).html_safe};
+
+    new Spbec.Views.AttachmentsFormList({
+      chosen_attachments: new Spbec.Collections.Attachments(attachmentsJSON),
+      form_url: "#{form_url}",
+      model_name: '#{model_name}',
+      el: $('#attachments-form-list')
+    }).render();
+
+  });
+

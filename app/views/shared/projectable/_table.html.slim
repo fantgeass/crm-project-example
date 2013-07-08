@@ -1,0 +1,28 @@
+table.table.table-striped.table-bordered.table-spbec
+  tbody
+  - collection.each do |model|
+    tr
+      td= model.creator_avatar_tag
+      td
+        .tcp-name= link_to model.title, model
+        .tcp-items
+          = link_to "(#{model.tasks.is_complete.size}/#{model.tasks.size})", url_for([model, Task]), class: 'tasks', title: 'Перейти к задачам'
+          = link_to "(#{model.questions.is_complete.size}/#{model.questions.size})", url_for([model, Question]), class: 'questions', title: 'Перейти к вопросам'
+          = link_to "(#{model.related_attachments.size})", url_for([model, Attachment]), class: 'files', title: 'Перейти к файлам'
+          = link_to "(#{model.comment_threads.size})", url_for([model, Comment]), class: 'comments', title: 'Перейти к комментариям'
+
+      td= model.client
+
+      td.td-dates
+        .tcp-start= model.planned_start_date
+        .tcp-finish= model.planned_complete_date
+      td.td-progress
+        div.progress.progress-spbec
+          == model.progress_bar
+
+      td.table-actions
+        = update_link_to edit_resource_path(model)
+  tfoot
+    tr
+      td colspan="6"
+        = paginate collection

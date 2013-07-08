@@ -1,0 +1,5 @@
+- @staff.each do |staff_item|
+  .header
+    .pull-right= button_tag 'Добавить', class: 'btn'
+    h5= staff_item.title
+    h4= staff_item.user

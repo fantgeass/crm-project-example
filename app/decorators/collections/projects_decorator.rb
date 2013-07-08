@@ -1,0 +1,3 @@
+class ProjectsDecorator < CollectionDecorator
+
+end

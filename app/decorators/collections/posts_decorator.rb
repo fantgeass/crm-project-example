@@ -1,0 +1,3 @@
+class PostsDecorator < CollectionDecorator
+
+end

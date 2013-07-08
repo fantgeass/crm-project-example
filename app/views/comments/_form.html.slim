@@ -1,0 +1,7 @@
+= simple_form_for [parent, @comment], {remote: true, validate: true, html: {:'data-type' => 'json'}} do |f|
+  = f.hidden_field :parent_id
+  .pull-left
+    = current_user.avatar_tag
+  .media-body
+    = f.text_area :body, class: 'comment-textarea', rows: 7, placeholder: 'Ваш комментарий'
+  .form-actions= f.button :submit, id: 'submit_comment', class: 'btn btn-spbec pull-right'

@@ -1,0 +1,8 @@
+= simple_form_for(@company, remote: true, validate: true) do |f|
+  = f.error_notification
+
+  = f.input :title, validate: {presence: true}
+
+
+coffee:
+  $('#new_company').enableClientSideValidations();
