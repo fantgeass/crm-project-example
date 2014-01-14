@@ -1,0 +1,1 @@
+class Spbec.Models.StaffRole extends Backbone.Model

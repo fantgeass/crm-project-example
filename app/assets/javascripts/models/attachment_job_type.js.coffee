@@ -1,0 +1,1 @@
+class Spbec.Models.AttachmentJobType extends Backbone.Model
